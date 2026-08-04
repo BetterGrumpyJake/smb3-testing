@@ -1894,16 +1894,14 @@ FrozenStanding:
 	STA <Player_InAir
 	
 	;snap to enemy
-	LDA <Objects_SpriteY,X
-	SEC
-	SBC <Temp_Var5
-	CLC
-	ADC #30
-	STA <Temp_Var1
+	LDA <Objects_SpriteY,X			;A=objects sprite Y
+	SUB <Temp_Var5					;Temp_Var5=objects hitbox top
+									;A = objects_y - object hitbox top
+	ADD #30							;A = A + 30
+	STA <Temp_Var1					;(how far above the object does players head go)
 	
-	LDA <Objects_Y,X
-	SEC
-	SBC <Temp_Var1
+	LDA <Objects_Y,X				;A=objects Y
+	SUB <Temp_Var1					;A = objects_y - temp_var1
 	STA <Player_Y
 	
 	LDA <Objects_YHi,X
